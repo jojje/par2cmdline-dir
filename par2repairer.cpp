@@ -1171,7 +1171,7 @@ bool Par2Repairer::VerifySourceFiles(void)
       {
         string path;
         string name;
-        DiskFile::SplitFilename(filename, path, name);
+        DiskFile::SplitRelativeDir(filename, path, name);
 
         cout << "Target: \"" << name << "\" - missing." << endl;
       }
@@ -1424,7 +1424,7 @@ bool Par2Repairer::ScanDataFile(DiskFile                *diskfile,    // [in]
 
   string path;
   string name;
-  DiskFile::SplitFilename(diskfile->FileName(), path, name);
+  DiskFile::SplitRelativeDir(diskfile->FileName(), path, name);
 
   string shortname;
   if (name.size() > 56)
@@ -1617,7 +1617,7 @@ bool Par2Repairer::ScanDataFile(DiskFile                *diskfile,    // [in]
           else if (originalsourcefile != 0)
           {
             string targetname;
-            DiskFile::SplitFilename(sourcefile->TargetFileName(), path, targetname);
+            DiskFile::SplitRelativeDir(sourcefile->TargetFileName(), path, targetname);
 
             cout << "Target: \"" 
                  << name 
@@ -1633,7 +1633,7 @@ bool Par2Repairer::ScanDataFile(DiskFile                *diskfile,    // [in]
           else
           {
             string targetname;
-            DiskFile::SplitFilename(sourcefile->TargetFileName(), path, targetname);
+            DiskFile::SplitRelativeDir(sourcefile->TargetFileName(), path, targetname);
 
             cout << "File: \"" 
                  << name 
@@ -1662,7 +1662,7 @@ bool Par2Repairer::ScanDataFile(DiskFile                *diskfile,    // [in]
         else if (originalsourcefile != 0)
         {
           string targetname;
-          DiskFile::SplitFilename(sourcefile->TargetFileName(), path, targetname);
+          DiskFile::SplitRelativeDir(sourcefile->TargetFileName(), path, targetname);
 
           cout << "Target: \"" 
                << name 
@@ -1674,7 +1674,7 @@ bool Par2Repairer::ScanDataFile(DiskFile                *diskfile,    // [in]
         else
         {
           string targetname;
-          DiskFile::SplitFilename(sourcefile->TargetFileName(), path, targetname);
+          DiskFile::SplitRelativeDir(sourcefile->TargetFileName(), path, targetname);
 
           cout << "File: \"" 
                << name 

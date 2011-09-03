@@ -558,7 +558,8 @@ bool CommandLine::Parse(int argc, char *argv[])
         while (fn != filenames->end())
         {
           // Convert filename from command line into a full path + filename
-          string filename = DiskFile::GetCanonicalPathname(*fn);
+          //string filename = DiskFile::GetCanonicalPathname(*fn);
+          string filename(*fn);
 
           // If this is the first file on the command line, then it
           // is the main PAR2 file.

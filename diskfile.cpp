@@ -796,6 +796,20 @@ void DiskFile::SplitFilename(string filename, string &path, string &name)
   }
 }
 
+// Separates the relative directory signifying where the par-file resides
+// from the path stored as the filename in the PAR2-file. Only intended to
+// be used for console output messages.
+void DiskFile::SplitRelativeDir(string filename,string &path, string &name) {
+  string::size_type where;
+  if (string::npos != (where = filename.find('./')) ||
+      string::npos != (where = filename.find('.\\')))
+  {
+    path = filename.substr(0, where+1);
+    name = filename.substr(where+1);
+  }
+}
+
+
 bool DiskFile::FileExists(string filename)
 {
   struct stat st;
@@ -840,12 +854,12 @@ string DiskFile::TranslateFilename(string filename)
       {
       case '"':
       case '*':
-      case '/':
+//    case '/':
       case ':':
       case '<':
       case '>':
       case '?':
-      case '\\':
+//    case '\\':
       case '|':
         ok = false;
       }

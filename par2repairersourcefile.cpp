@@ -67,6 +67,7 @@ void Par2RepairerSourceFile::ComputeTargetFileName(string path)
   string filename = DiskFile::TranslateFilename(descriptionpacket->FileName());
 
   // Strip the path from the filename
+  /*
   string::size_type where;
   if (string::npos != (where = filename.find_last_of('\\'))
       || string::npos != (where = filename.find_last_of('/'))
@@ -77,7 +78,8 @@ void Par2RepairerSourceFile::ComputeTargetFileName(string path)
   {
     filename = filename.substr(where+1);
   }
-
+  */
+  
   targetfilename = path + filename;
 }
 

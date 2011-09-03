@@ -73,6 +73,7 @@ public:
   static string GetCanonicalPathname(string filename);
 
   static void SplitFilename(string filename, string &path, string &name);
+  static void SplitRelativeDir(string filename, string &path, string &name);
   static string TranslateFilename(string filename);
 
   static bool FileExists(string filename);

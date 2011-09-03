@@ -619,7 +619,7 @@ bool Par1Repairer::VerifySourceFiles(void)
       {
         string path;
         string name;
-        DiskFile::SplitFilename(filename, path, name);
+        DiskFile::SplitRelativeDir(filename, path, name);
 
         cout << "Target: \"" << name << "\" - missing." << endl;
       }
@@ -704,7 +704,7 @@ bool Par1Repairer::VerifyDataFile(DiskFile *diskfile, Par1RepairerSourceFile *so
 
   string path;
   string name;
-  DiskFile::SplitFilename(diskfile->FileName(), path, name);
+  DiskFile::SplitRelativeDir(diskfile->FileName(), path, name);
 
   // How big is the file we are checking
   u64 filesize = diskfile->FileSize();
@@ -851,7 +851,7 @@ bool Par1Repairer::VerifyDataFile(DiskFile *diskfile, Par1RepairerSourceFile *so
       else if (sourcefile != 0)
       {
         string targetname;
-        DiskFile::SplitFilename(sourcefile->FileName(), path, targetname);
+        DiskFile::SplitRelativeDir(sourcefile->FileName(), path, targetname);
 
         cout << "Target: \"" 
               << name 
@@ -866,7 +866,7 @@ bool Par1Repairer::VerifyDataFile(DiskFile *diskfile, Par1RepairerSourceFile *so
       if (noiselevel > CommandLine::nlSilent)
       {
         string targetname;
-        DiskFile::SplitFilename(match->FileName(), path, targetname);
+        DiskFile::SplitRelativeDir(match->FileName(), path, targetname);
 
         cout << "File: \"" 
               << name 

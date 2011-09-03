@@ -492,7 +492,7 @@ bool Par2Creator::OpenSourceFiles(const list<CommandLine::ExtraFile> &extrafiles
 
     string path;
     string name;
-    DiskFile::SplitFilename(extrafile->FileName(), path, name);
+    DiskFile::SplitRelativeDir(extrafile->FileName(), path, name);
 
     if (noiselevel > CommandLine::nlSilent)
       cout << "Opening: " << name << endl;

@@ -60,6 +60,7 @@ bool Par2CreatorSourceFile::Open(CommandLine::NoiseLevel noiselevel, const Comma
   blockcount = (u32)((filesize + blocksize-1) / blocksize);
   
   // Determine what filename to record in the PAR2 files
+  /*
   string::size_type where;
   if (string::npos != (where = diskfilename.find_last_of('\\')) ||
       string::npos != (where = diskfilename.find_last_of('/')))
@@ -70,6 +71,8 @@ bool Par2CreatorSourceFile::Open(CommandLine::NoiseLevel noiselevel, const Comma
   {
     parfilename = diskfilename;
   }
+  */
+  parfilename = diskfilename;
 
   // Create the Description and Verification packets
   descriptionpacket = new DescriptionPacket;
