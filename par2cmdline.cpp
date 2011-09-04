@@ -39,6 +39,10 @@ void banner(void)
        << "it under the terms of the GNU General Public License as published by the" << endl
        << "Free Software Foundation; either version 2 of the License, or (at your" << endl
        << "option) any later version. See COPYING for details." << endl
+       << endl
+       << "Built from" << endl
+       << "  Source: " SOURCEURL << endl
+       << "  Commit: " COMMIT << endl
        << endl;
 }
 
