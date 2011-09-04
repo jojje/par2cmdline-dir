@@ -540,7 +540,8 @@ bool CommandLine::Parse(int argc, char *argv[])
 
         // If the argument includes wildcard characters, 
         // search the disk for matching files
-        if (strchr(argv[0], '*') || strchr(argv[0], '?'))
+        if (strchr(argv[0], '*') || strchr(argv[0], '?')
+            || DiskFile::IsDirectory(string(argv[0])) )
         {
           string path;
           string name;

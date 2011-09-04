@@ -77,6 +77,7 @@ public:
   static string TranslateFilename(string filename);
 
   static bool FileExists(string filename);
+  static bool IsDirectory(string filename);
   static u64 GetFileSize(string filename);
 
   // Search the specified path for files which match the specified wildcard

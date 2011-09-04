@@ -332,6 +332,20 @@ list<string>* DiskFile::FindFiles(string path, string wildcard)
       if (0 == (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
       {
         matches->push_back(path + fd.cFileName);
+    } 
+    else // Is a directory, so traverse into it
+    {
+      if(! (strcmp(fd.cFileName,".") == 0 || strcmp(fd.cFileName,"..") == 0) )
+      {
+        string nextDir = path + fd.cFileName + PATHSEP;
+        list<string> *files = DiskFile::FindFiles(nextDir,"*");
+        list <string>::iterator i;
+        for ( i = files->begin( ); i != files->end( ); i++ )
+        {
+          matches->push_back(*i);
+        }
+        delete files;
+        }
       }
     } while (::FindNextFile(h, &fd));
     ::FindClose(h);
@@ -814,6 +828,12 @@ bool DiskFile::FileExists(string filename)
 {
   struct stat st;
   return ((0 == stat(filename.c_str(), &st)) && (0 != (st.st_mode & S_IFREG)));
+}
+
+bool DiskFile::IsDirectory(string filename)
+{
+  struct stat st;
+  return ((0 == stat(filename.c_str(), &st)) && (0 != (st.st_mode & S_IFDIR)));
 }
 
 u64 DiskFile::GetFileSize(string filename)

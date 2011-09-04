@@ -72,7 +72,10 @@ bool Par2CreatorSourceFile::Open(CommandLine::NoiseLevel noiselevel, const Comma
     parfilename = diskfilename;
   }
   */
-  parfilename = diskfilename;
+  string name;
+  string path;
+  DiskFile::SplitRelativeDir(diskfilename,path,name);
+  parfilename = name;
 
   // Create the Description and Verification packets
   descriptionpacket = new DescriptionPacket;
