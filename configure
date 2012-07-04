@@ -654,6 +654,7 @@ build_os
 build_vendor
 build_cpu
 build
+AX_GIT
 target_alias
 host_alias
 build_alias
@@ -2221,6 +2222,68 @@ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
+
+
+
+
+  # Extract the first word of "git", so it can be a program name with args.
+set dummy git; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if test "${ac_cv_path_AX_GIT+set}" = set; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $AX_GIT in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_AX_GIT="$AX_GIT" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_path_AX_GIT="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  test -z "$ac_cv_path_AX_GIT" && ac_cv_path_AX_GIT=":"
+  ;;
+esac
+fi
+AX_GIT=$ac_cv_path_AX_GIT
+if test -n "$AX_GIT"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $AX_GIT" >&5
+$as_echo "$AX_GIT" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+  if test "$AX_GIT" != :; then
+
+cat >>confdefs.h <<_ACEOF
+#define SOURCE_URL "`git config remote.origin.url 2>/dev/null`"
+_ACEOF
+
+
+cat >>confdefs.h <<_ACEOF
+#define COMMIT "`git rev-parse HEAD 2>/dev/null`"
+_ACEOF
+
+
+cat >>confdefs.h <<_ACEOF
+#define XXXX "`echo $PWD`"
+_ACEOF
+
+  fi
 
 
 ac_aux_dir=
