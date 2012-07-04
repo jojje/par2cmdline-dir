@@ -23,6 +23,9 @@ AC_PREREQ([2.67])
 AC_INIT([par2cmdline],[0.4],[peterbclements@users.sourceforge.net])
 AC_CONFIG_SRCDIR([par2cmdline.cpp])
 
+AC_CONFIG_MACRO_DIR([m4])
+AX_SET_ORIGIN
+
 AC_CANONICAL_HOST
 
 AC_CONFIG_HEADERS([config.h])

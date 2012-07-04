@@ -41,7 +41,7 @@ void banner(void)
        << "option) any later version. See COPYING for details." << endl
        << endl
        << "Built from" << endl
-       << "  Source: " SOURCEURL << endl
+       << "  Source: " SOURCE_URL << endl
        << "  Commit: " COMMIT << endl
        << endl;
 }
