@@ -815,11 +815,15 @@ void DiskFile::SplitFilename(string filename, string &path, string &name)
 // be used for console output messages.
 void DiskFile::SplitRelativeDir(string filename,string &path, string &name) {
   string::size_type where;
-  if (string::npos != (where = filename.find('./')) ||
-      string::npos != (where = filename.find('.\\')))
+  if ((string::npos != (where = filename.find("./")) ||
+       string::npos != (where = filename.find(".\\"))) &&
+      (where == 0))
   {
-    path = filename.substr(0, where+1);
-    name = filename.substr(where+1);
+    path = filename.substr(0, where+2);
+    name = filename.substr(where+2);
+  } else {
+    path = string("");
+    name = filename;
   }
 }
 
@@ -889,6 +893,7 @@ string DiskFile::TranslateFilename(string filename)
     {
       ok = false;
     }
+/*
     else
     {
       switch (ch)
@@ -897,6 +902,7 @@ string DiskFile::TranslateFilename(string filename)
         ok = false;
       }
     }
+*/
 #endif
 
 

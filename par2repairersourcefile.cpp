@@ -79,7 +79,6 @@ void Par2RepairerSourceFile::ComputeTargetFileName(string path)
     filename = filename.substr(where+1);
   }
   */
-  
   targetfilename = path + filename;
 }
 
