@@ -656,6 +656,21 @@ list<string>* DiskFile::FindFiles(string path, string wildcard)
         if (name == "." || name == "..")
           continue;
 
+        if (DiskFile::IsDirectory(path+name))
+        {
+          string wildcard = "*";
+
+          list<string> *rematches = DiskFile::FindFiles(path + name + "/", wildcard);
+          list<string>::iterator ite = rematches->begin();
+          while (ite != rematches->end())
+          {
+            string file(*ite);
+            matches->push_back(file);
+            ++ite;
+          }
+          continue;
+        }
+
         if (multiple)
         {
           if (name.size() >= wildcard.size() &&

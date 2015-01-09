@@ -547,6 +547,12 @@ bool CommandLine::Parse(int argc, char *argv[])
           string name;
           DiskFile::SplitFilename(argv[0], path, name);
 
+          // If path was a directory, prepare for searching inside
+          if (DiskFile::IsDirectory(path))
+          {
+            name = '*';
+          }
+
           filenames = DiskFile::FindFiles(path, name);
         }
         else
