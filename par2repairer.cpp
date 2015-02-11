@@ -91,6 +91,14 @@ Result Par2Repairer::Process(const CommandLine &commandline, bool dorepair)
   string name;
   DiskFile::SplitFilename(par2filename, searchpath, name);
 
+    ExtraFileIterator extrafile = extrafiles.begin();
+    while (extrafile != extrafiles.end()) {
+        //string path;
+        //string name;
+        //DiskFile::SplitRelativeDir(extrafile->FileName(), path, name);
+        ++extrafile;
+    }
+
   // Load packets from the main PAR2 file
   if (!LoadPacketsFromFile(searchpath + name))
     return eLogicError;

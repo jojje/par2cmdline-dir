@@ -332,19 +332,19 @@ list<string>* DiskFile::FindFiles(string path, string wildcard)
       if (0 == (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
       {
         matches->push_back(path + fd.cFileName);
-    } 
-    else // Is a directory, so traverse into it
-    {
-      if(! (strcmp(fd.cFileName,".") == 0 || strcmp(fd.cFileName,"..") == 0) )
+      }
+      else // Is a directory, so traverse into it
       {
-        string nextDir = path + fd.cFileName + PATHSEP;
-        list<string> *files = DiskFile::FindFiles(nextDir,"*");
-        list <string>::iterator i;
-        for ( i = files->begin( ); i != files->end( ); i++ )
+        if(! (strcmp(fd.cFileName,".") == 0 || strcmp(fd.cFileName,"..") == 0) )
         {
-          matches->push_back(*i);
-        }
-        delete files;
+          string nextDir = path + fd.cFileName + PATHSEP;
+          list<string> *files = DiskFile::FindFiles(nextDir,"*");
+          list <string>::iterator i;
+          for ( i = files->begin( ); i != files->end( ); i++ )
+          {
+            matches->push_back(*i);
+          }
+          delete files;
         }
       }
     } while (::FindNextFile(h, &fd));
@@ -658,7 +658,7 @@ list<string>* DiskFile::FindFiles(string path, string wildcard)
 
         if (DiskFile::IsDirectory(path+name))
         {
-          string wildcard = "*";
+          //string wildcard = "*";
 
           list<string> *rematches = DiskFile::FindFiles(path + name + "/", wildcard);
           list<string>::iterator ite = rematches->begin();
