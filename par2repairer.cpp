@@ -1166,9 +1166,6 @@ bool Par2Repairer::VerifySourceFiles(void)
 
       // We have finished with the file for now
       diskfile->Close();
-
-      // Find out how much data we have found
-      UpdateVerificationResults();
     }
     else
     {
@@ -1187,6 +1184,9 @@ bool Par2Repairer::VerifySourceFiles(void)
 
     ++sf;
   }
+
+  // Find out how much data we have found
+  UpdateVerificationResults();
 
   return finalresult;
 }
@@ -1228,12 +1228,12 @@ bool Par2Repairer::VerifyExtraFiles(const list<CommandLine::ExtraFile> &extrafil
 
         // We have finished with the file for now
         diskfile->Close();
-
-        // Find out how much data we have found
-        UpdateVerificationResults();
       }
     }
   }
+
+  // Find out how much data we have found
+  UpdateVerificationResults();
 
   return true;
 }
@@ -2341,10 +2341,10 @@ bool Par2Repairer::VerifyTargetFiles(void)
 
     // Close the file again
     targetfile->Close();
-
-    // Find out how much data we have found
-    UpdateVerificationResults();
   }
+
+  // Find out how much data we have found
+  UpdateVerificationResults();
 
   return finalresult;
 }
