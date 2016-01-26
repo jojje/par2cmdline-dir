@@ -91,6 +91,14 @@ Result Par2Repairer::Process(const CommandLine &commandline, bool dorepair)
   string name;
   DiskFile::SplitFilename(par2filename, searchpath, name);
 
+    ExtraFileIterator extrafile = extrafiles.begin();
+    while (extrafile != extrafiles.end()) {
+        //string path;
+        //string name;
+        //DiskFile::SplitRelativeDir(extrafile->FileName(), path, name);
+        ++extrafile;
+    }
+
   // Load packets from the main PAR2 file
   if (!LoadPacketsFromFile(searchpath + name))
     return eLogicError;
@@ -1158,9 +1166,6 @@ bool Par2Repairer::VerifySourceFiles(void)
 
       // We have finished with the file for now
       diskfile->Close();
-
-      // Find out how much data we have found
-      UpdateVerificationResults();
     }
     else
     {
@@ -1179,6 +1184,9 @@ bool Par2Repairer::VerifySourceFiles(void)
 
     ++sf;
   }
+
+  // Find out how much data we have found
+  UpdateVerificationResults();
 
   return finalresult;
 }
@@ -1220,12 +1228,12 @@ bool Par2Repairer::VerifyExtraFiles(const list<CommandLine::ExtraFile> &extrafil
 
         // We have finished with the file for now
         diskfile->Close();
-
-        // Find out how much data we have found
-        UpdateVerificationResults();
       }
     }
   }
+
+  // Find out how much data we have found
+  UpdateVerificationResults();
 
   return true;
 }
@@ -1458,6 +1466,9 @@ bool Par2Repairer::ScanDataFile(DiskFile                *diskfile,    // [in]
 
   u64 progress = 0;
 
+  u32 noduplicatenonext = 0;
+  u32 noduplicatenonextmax = 10;
+
   // Whilst we have not reached the end of the file
   while (filechecksummer.Offset() < diskfile->FileSize())
   {
@@ -1551,9 +1562,20 @@ bool Par2Repairer::ScanDataFile(DiskFile                *diskfile,    // [in]
         // What entry do we expect next
         nextentry = 0;
 
-        // Advance 1 byte
-        if (!filechecksummer.Step())
-          return false;
+        if (noduplicatenonext < noduplicatenonextmax)
+        {
+          if (!filechecksummer.Step())
+            return false;
+
+          noduplicatenonext++;
+        }
+        else
+        {
+          if (!filechecksummer.Jump((blocksize - noduplicatenonext)))
+            return false;
+
+          noduplicatenonext = 0;
+        }
       }
     }
   }
@@ -2333,10 +2355,10 @@ bool Par2Repairer::VerifyTargetFiles(void)
 
     // Close the file again
     targetfile->Close();
-
-    // Find out how much data we have found
-    UpdateVerificationResults();
   }
+
+  // Find out how much data we have found
+  UpdateVerificationResults();
 
   return finalresult;
 }

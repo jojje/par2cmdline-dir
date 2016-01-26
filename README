@@ -304,6 +304,22 @@ files. Whilst you can create recovery files for files from multiple locations,
 it will expect all files to be in the current directory when verifying and
 repairing. This limitation will be corrected in an update.
 
+UPDATES NOTES FOR https://github.com/ifsnop/par2cmdline-dir/
+
+This version of par2cmdline **does** support recording path information for
+files. You **can** create recovery files for files from multiple locations.
+However some limitations in the RS matrix implementation will arise:
+
+ * par2 verify Doesn't work for absolute paths (starting with '/'). Archives
+   are created without problems.
+ * par2 repair dosn't create directories yet, so they must be created manually.
+ * blockcount and blocksize imposes a limit in the size and the number of the
+   files that can be processed.
+   Blocksize has to be <=429,496,728 bytes and blockcount has to be <=32768.
+   Although size is hardly a limiting factor (32768*429,496,728 is more or less
+   12Tb), **the number of files has to be at least equal to the block count,
+   so no more that 32768 files can be stored in a par2 file.**
+
 REED SOLOMON CODING
 
 PAR2 uses Reed Solomon Coding to perform its calculations. For details of this

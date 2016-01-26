@@ -1,4 +1,4 @@
-//  This file is part of par2cmdline (a PAR 2.0 compatible file verification and
+    //  This file is part of par2cmdline (a PAR 2.0 compatible file verification and
 //  repair tool). See http://parchive.sourceforge.net for details of PAR 2.0.
 //
 //  Copyright (c) 2003 Peter Brian Clements
@@ -66,6 +66,7 @@ CommandLine::CommandLine(void)
 , recoveryblockcount(0)
 , recoveryblockcountset(false)
 , redundancy(0)
+, redundancySize(0)
 , redundancyset(false)
 , parfilename()
 , extrafiles()
@@ -546,6 +547,12 @@ bool CommandLine::Parse(int argc, char *argv[])
           string path;
           string name;
           DiskFile::SplitFilename(argv[0], path, name);
+
+          // If path was a directory, prepare for searching inside
+          if (DiskFile::IsDirectory(path))
+          {
+            name = '*';
+          }
 
           filenames = DiskFile::FindFiles(path, name);
         }
