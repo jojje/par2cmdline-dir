@@ -434,11 +434,12 @@ inline const VerificationHashEntry* VerificationHashTable::FindMatch(const Verif
   }
 
   // Return what we have found
+  /*
   if (nextentry == 0)
   {
     duplicate = true;
   }
-
+  */
   return nextentry;
 }
 
